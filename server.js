@@ -1,10 +1,12 @@
 // importing modules
 const dotenv = require("dotenv");
+dotenv.config({ path: "./config.env" });
 const mongoose = require("mongoose");
 const app = require("./app");
-dotenv.config({ path: "./config.env" });
+
 //connection to database
 const PASSWORD = process.env.DB_PASSWORD;
+
 const DB = process.env.DATABASE.replaceAll("<PASSWORD>", PASSWORD);
 mongoose
   .connect(DB)

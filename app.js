@@ -1,9 +1,11 @@
 const express = require("express");
-const materialControllers = require("./controllers/materialControllers");
+const materialRoute = require("./routes/materialRoute");
+const userRoute = require("./routes/userRoute");
+const globalErrorHandler = require("./controllers/errorController");
 const app = express();
-app
-  .route("/api/materials")
-  .get(materialControllers.getMaterials)
-  .post(materialControllers.uploadMaterial);
+app.use(express.json());
 
+app.use("/api/materials", materialRoute);
+app.use("/api/users", userRoute);
+app.use(globalErrorHandler);
 module.exports = app;

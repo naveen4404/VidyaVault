@@ -21,11 +21,10 @@ const materialSchema = mongoose.Schema({
   uploadedAt: {
     type: Date,
     default: Date.now(),
-    required: true,
   },
   uploadedBy: {
-    type: String,
-    trim: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   fileLink: {
     type: String,
