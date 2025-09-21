@@ -2,7 +2,7 @@ const Material = require("../models/materialModel");
 const ApiFeatures = require("../utils/ApiFeatures");
 const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
-
+const drive = require("../utils/drive");
 // retrieving all the materials
 exports.getMaterials = catchAsync(async (req, res, next) => {
   const materialQuery = new ApiFeatures(Material.find(), req.query);
@@ -17,8 +17,18 @@ exports.getMaterials = catchAsync(async (req, res, next) => {
 
 // uploading material
 exports.uploadMaterial = catchAsync(async (req, res, next) => {
-  const data = { ...req.body, uploadedBy: req.user._id };
+  // get the link and extract id
+  const fileId = drive.getDriveId(req.body.fileLink);
+  if (!fileId) return next(new AppError("invalid drive link", 400));
+
+  // check for validity of the link
+  if (!drive.validateDriveLink(fileId))
+    return next(new AppError("file not found or private", 404));
+
+  const data = { ...req.body, uploadedBy: req.user._id, fileId: fileId };
+
   const material = await Material.create(data);
+
   res.status(201).json({
     status: "material uploaded",
     materialID: material._id,

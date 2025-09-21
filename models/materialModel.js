@@ -26,10 +26,10 @@ const materialSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  fileLink: {
+  fileId: {
     type: String,
     required: true,
-    trim: true,
+    unique: true,
   },
 });
 
