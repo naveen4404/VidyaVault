@@ -29,10 +29,9 @@ const materialSchema = mongoose.Schema({
   fileId: {
     type: String,
     required: true,
-    unique: true,
+    unique: [true, "material exists already"],
   },
 });
-
 const Material = mongoose.model("Material", materialSchema);
 
 module.exports = Material;

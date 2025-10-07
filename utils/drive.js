@@ -1,3 +1,7 @@
+exports.isDriveLink = (fileLink) => {
+  const { hostname } = new URL(fileLink);
+  return hostname === "drive.google.com";
+};
 exports.getDriveId = (fileLink) => {
   // First try to match /d/FILE_ID/ pattern
   const match1 = fileLink.match(/\/d\/([^\/]+)/);
@@ -18,6 +22,7 @@ exports.validateDriveLink = async (fileId) => {
   try {
     const url = `https://drive.google.com/uc?export=download&id=${fileId}`;
     const response = await fetch(url, { method: "HEAD" });
+    console.log(response);
     return response.ok;
   } catch (err) {
     return false;

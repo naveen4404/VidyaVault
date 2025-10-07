@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
   },
   email: {
     type: String,
-    unique: true,
+    unique: [true, "user with this email is already existed"],
     required: [true, "Please provide an email"],
     lowercase: true,
     validate: [validator.isEmail, "Please provide a valid email"],
@@ -35,6 +35,10 @@ const userSchema = mongoose.Schema({
     type: String,
     enum: ["user", "admin"],
     default: "user",
+  },
+  joinedOn: {
+    type: Date,
+    default: Date.now(),
   },
   passwordChangedAt: Date,
 });

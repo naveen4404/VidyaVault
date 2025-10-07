@@ -43,8 +43,11 @@ module.exports = (err, req, res, next) => {
     if (error.name === "ValidationError") {
       error = handleValidationErrorDB(error);
     }
-    if (err.name === "JsonWebTokenError") {
+    if (error.name === "JsonWebTokenError") {
       error = handleJWTTokenError(error);
+    }
+    if (error.code === 11000) {
+      error = handleDupilcateDocument(error);
     }
     sendErrProduction(error, res);
   } else if (env === "development") {
