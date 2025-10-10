@@ -1,17 +1,39 @@
+import dayjs from "dayjs";
 import "./CardContainer.css";
 
-export function CardContainer() {
+export function CardContainer({ material }) {
+  const viewFile = () => {
+    window.open(
+      `https://drive.google.com/file/d/${material.fileId}/view`,
+      "_blank"
+    );
+  };
   return (
     <div className="card-container">
-      <h3 className="title">Introduction to Arrays</h3>
-      <p className="sub-name">Data Structures</p>
-      <p className="description">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptate,
-        sint sit delectus at natus
+      <h3 className="title">
+        {material.title
+          .split(" ")
+          .map((word) => {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+          })
+          .join(" ")}
+      </h3>
+      <p className="sub-name">{material.subject}</p>
+      <p className="description">{material.description}</p>
+      <p className="upload-by">
+        {material.uploadedBy.name
+          .split(" ")
+          .map((word) => {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+          })
+          .join(" ")}
       </p>
-      <p className="upload-by">Uploaded by Naveen</p>
-      <p className="upload-on">Uploaded on Oct 08, 2025</p>
-      <button className="view-btn">View Material</button>
+      <p className="upload-on">
+        {dayjs(material.uploadedAt).format("MMM DD, YYYY")}
+      </p>
+      <button className="view-btn" onClick={viewFile}>
+        View Material
+      </button>
     </div>
   );
 }

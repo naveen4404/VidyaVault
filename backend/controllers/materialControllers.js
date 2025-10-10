@@ -6,9 +6,16 @@ const drive = require("../utils/drive");
 
 // retrieving all the materials
 exports.getMaterials = catchAsync(async (req, res, next) => {
-  const materialQuery = new ApiFeatures(Material.find(), req.query);
-  materialQuery.filter().sort();
-  const materials = await materialQuery.query;
+  const materialQuery = new ApiFeatures(
+    Material.find().populate("uploadedBy"),
+    req.query
+  );
+  materialQuery.filter().sort().fields();
+  let materials = await materialQuery.query;
+  materials = await Material.populate(materials, {
+    path: "uploadedBy",
+    select: "name",
+  });
   res.status(200).json({
     status: "success",
     noOfMaterials: materials.length,
@@ -51,11 +58,20 @@ exports.searchMaterials = catchAsync(async (req, res, next) => {
           },
         },
       },
+      {
+        $project: {
+          __v: 0,
+        },
+      },
     ]),
     req.query
   );
   materialQuery.sort();
-  const filteredmaterials = await materialQuery.query;
+  let filteredmaterials = await materialQuery.query;
+  filteredmaterials = await Material.populate(filteredmaterials, {
+    path: "uploadedBy",
+    select: "name",
+  });
 
   res.status(200).json({
     status: "success",

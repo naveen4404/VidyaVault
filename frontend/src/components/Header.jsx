@@ -1,5 +1,48 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./Header.css";
-export function Header() {
+export function Header({ setMaterials }) {
+  const [query, setQuery] = useState("");
+  const setQueryText = (event) => {
+    setQuery(event.target.value);
+  };
+
+  const fetchMaterialOnSearch = async () => {
+    let response;
+    if (query.length > 2) {
+      response = await axios.get(
+        `http://127.0.0.1:8000/api/materials/search/${query.trim()}`
+      );
+      setMaterials(response.data.data);
+    }
+  };
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      try {
+        let response;
+        if (query.length > 2) {
+          response = await axios.get(
+            `http://127.0.0.1:8000/api/materials/search/${query.trim()}`
+          );
+        } else {
+          response = await axios.get("http://127.0.0.1:8000/api/materials/");
+        }
+        setMaterials(response.data.data);
+      } catch (err) {
+        console.error(err);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  const keyHandler = (event) => {
+    if (event.key === "Enter") {
+      fetchMaterialOnSearch();
+    } else if (event.key === "Escape") {
+      setQuery("");
+    }
+  };
   return (
     <>
       <header className="header">
@@ -26,9 +69,12 @@ export function Header() {
             className="input-text"
             type="text"
             id="input-text"
+            value={query}
+            onChange={setQueryText}
+            onKeyDown={keyHandler}
             placeholder="e.g., 'Data Structures'"
           />
-          <button className="search-btn">
+          <button className="search-btn" onClick={fetchMaterialOnSearch}>
             <i className="fa-solid fa-magnifying-glass" />
           </button>
         </div>

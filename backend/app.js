@@ -1,10 +1,11 @@
 const express = require("express");
+const cors = require("cors");
 const materialRoute = require("./routes/materialRoute");
 const userRoute = require("./routes/userRoute");
 const globalErrorHandler = require("./controllers/errorController");
 const app = express();
 app.use(express.json());
-
+app.use(cors());
 app.use("/api/materials", materialRoute);
 app.use("/api/users", userRoute);
 app.use(globalErrorHandler);
