@@ -1,0 +1,267 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: #f7f9fc;
+}
+
+/* Main Header Container */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  /* Increased padding slightly for better desktop feel */
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
+  /* allows wrapping on all screens */
+  border-radius: 12px;
+  margin: 10px;
+}
+
+/* ========== LOGO ========== */
+.header .logo {
+  color: #13a4ec;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.header .logo .logo-item {
+  /* Placeholder for a simple SVG or icon */
+  width: 75px;
+  height: 40px;
+  background-color: #13a4ec;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.header .logo .logo-text {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 1.5px;
+  /* Adjusted spacing slightly */
+  margin-left: 10px;
+}
+
+/* ========== SEARCH BAR (Always on the second row now) ========== */
+.header .search-bar {
+  flex-basis: 100%;
+  /* Force it to take full width and wrap */
+  order: 2;
+  /* Push it to the second line */
+  display: flex;
+  justify-content: center;
+  padding: 0 0;
+  /* Removed horizontal padding to allow full width stretch */
+  margin-top: 16px;
+  /* Add space between top row and search bar */
+}
+
+.header .search-bar .input-text {
+  width: 100%;
+  max-width: 900px;
+  /* Increased max-width for large screens */
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 9999px;
+  /* Fully rounded search bar */
+  border: 1px solid #d1d5db;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.header .search-bar .input-text:focus {
+  outline: none;
+  border-color: #13a4ec;
+  box-shadow: 0 0 0 2px rgba(19, 164, 236, 0.2);
+}
+
+.header .search-bar .search-btn {
+  padding: 5px 12px;
+  font-size: medium;
+  color: white;
+  margin-left: -40px;
+  /* Overlay on the input */
+  height: 44px;
+  border: none;
+  border-radius: 0 9999px 9999px 0;
+  /* Align with search bar shape */
+  cursor: pointer;
+  background-color: #13a4ec;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.header .search-bar .search-btn:hover {
+  background-color: #098dcf;
+}
+
+/* Icon for search button */
+.search-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ========== NAVIGATION BUTTONS ========== */
+.header .nav-items {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  /* Increased gap */
+}
+
+.header .nav-items button {
+  background-color: #13a4ec;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  /* Slightly more rounded */
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.1s;
+  white-space: nowrap;
+  /* Prevent button text from wrapping */
+}
+
+.header .nav-items button:hover {
+  background-color: #098dcf;
+  cursor: pointer;
+}
+
+.header .nav-items button:active {
+  transform: scale(0.98);
+}
+
+.header .nav-items .login-btn {
+  color: #374151;
+  /* Dark gray text */
+  background-color: #e5e7eb;
+  /* Light gray background */
+}
+
+.header .nav-items .login-btn:hover {
+  background-color: #d1d5db;
+}
+
+/* ========== RESPONSIVENESS (Top-Right Anchor Ensured) ========== */
+
+/* Medium screens (tablet and small laptops) - Only changes size, not layout order */
+@media (max-width: 900px) {
+  .header {
+    gap: 15px;
+  }
+
+  .header .logo .logo-item {
+    width: 55px;
+  }
+
+  .header .logo .logo-text {
+    font-size: 20px;
+    margin-left: 8px;
+  }
+
+  .header .search-bar {
+    /* Search bar is already full width and below (order: 2) in default style */
+    margin-top: 12px;
+    /* Slight reduction in margin for medium screens */
+  }
+
+  .header .search-bar .input-text {
+    max-width: none;
+    /* Allow full width of the container */
+  }
+}
+
+/* Small screens (mobile) - Only changes size, not layout order */
+@media (max-width: 600px) {
+  .header {
+    gap: 10px;
+  }
+
+  .header .logo {
+    justify-content: flex-start;
+  }
+
+  .header .search-bar {
+    margin-top: 10px;
+    /* Reduced margin for smaller screens */
+  }
+
+  .header .nav-items {
+    gap: 8px;
+  }
+  .header .search-bar .input-text {
+    font-size: 13px;
+  }
+}
+
+/* Very small screens (below 500px) */
+@media (max-width: 500px) {
+  /* Hide logo text */
+  .header .logo .logo-text {
+    font-size: 10px;
+    margin-left: 4px;
+    letter-spacing: 0;
+  }
+
+  .header .logo .logo-item {
+    /* Make the logo icon smaller to free up space on the top bar */
+    width: 20px;
+    height: 30px;
+    font-size: 13px;
+  }
+
+  /* Reduced button size for the small screen */
+  .header .nav-items button {
+    font-size: 14px;
+    padding: 7px 10px;
+    /* Slightly reduced padding */
+  }
+}
+
+/* Ultra-small screens (below 360px) */
+@media (max-width: 360px) {
+  .header {
+    padding: 10px 15px;
+    /* Reduce overall header padding slightly */
+  }
+
+  .header .logo .logo-item {
+    width: 35px;
+    /* Minimum size for logo icon */
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .header .search-bar {
+    margin-top: 8px;
+    /* Add slight top margin to search bar */
+  }
+
+  .header .nav-items {
+    gap: 6px;
+    /* Reduced gap between buttons */
+  }
+
+  .header .nav-items button {
+    /* Aggressively reduce button size to ensure they fit side-by-side */
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}

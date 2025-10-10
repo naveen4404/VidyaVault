@@ -32,6 +32,7 @@ const materialSchema = mongoose.Schema({
     unique: [true, "material exists already"],
   },
 });
+materialSchema.index({ title: "text", subject: "text", description: "text" });
 const Material = mongoose.model("Material", materialSchema);
 
 module.exports = Material;

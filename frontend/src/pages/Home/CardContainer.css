@@ -1,0 +1,100 @@
+/* Card Container Styling */
+.card-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  /* Slightly larger radius for a modern look */
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid #f3f4f6;
+  /* Subtle border */
+}
+
+.card-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Card Elements */
+.card-container .title {
+  font-size: 1.5rem;
+  /* 24px */
+  font-weight: 700;
+  color: #1f2937;
+  /* Dark text for title */
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.card-container .sub-name {
+  font-size: 0.9rem;
+  /* 14px */
+  font-weight: 600;
+  color: #13a4ec;
+  /* Primary blue for category */
+  margin-bottom: 12px;
+  padding: 4px 8px;
+  display: inline-block;
+  background-color: #e5f5ff;
+  /* Light blue background */
+  border-radius: 6px;
+  align-self: flex-start;
+  /* Keeps the badge size contained */
+}
+
+.card-container .description {
+  font-size: 0.95rem;
+  color: #6b7280;
+  /* Muted text color for body */
+  margin-bottom: 16px;
+  /* Limit description for clean card look */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex-grow: 1;
+  /* Pushes the button and metadata to the bottom */
+}
+
+.card-container .upload-by,
+.card-container .upload-on {
+  font-size: 0.8rem;
+  /* 12px */
+  color: #9ca3af;
+  /* Light gray for metadata */
+  margin-bottom: 4px;
+}
+
+.card-container .upload-by {
+  margin-top: 8px;
+  /* Space between description and metadata */
+}
+
+.card-container .upload-on {
+  margin-bottom: 16px;
+}
+
+/* View Button Styling */
+.card-container .view-btn {
+  background-color: #13a4ec;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  width: 100%;
+}
+
+.card-container .view-btn:hover {
+  background-color: #098dcf;
+}
+
+.card-container .view-btn:active {
+  transform: scale(0.99);
+}

@@ -3,15 +3,64 @@ const ApiFeatures = require("../utils/ApiFeatures");
 const AppError = require("../utils/AppError");
 const catchAsync = require("../utils/catchAsync");
 const drive = require("../utils/drive");
+
 // retrieving all the materials
 exports.getMaterials = catchAsync(async (req, res, next) => {
   const materialQuery = new ApiFeatures(Material.find(), req.query);
-  materialQuery.filter().sort().fields();
+  materialQuery.filter().sort();
   const materials = await materialQuery.query;
   res.status(200).json({
     status: "success",
     noOfMaterials: materials.length,
     data: materials,
+  });
+});
+
+// search feature by using atlas auto complete
+exports.searchMaterials = catchAsync(async (req, res, next) => {
+  const key = req.params.key;
+  const materialQuery = new ApiFeatures(
+    Material.aggregate([
+      {
+        $search: {
+          index: "default",
+          compound: {
+            should: [
+              {
+                autocomplete: {
+                  query: key,
+                  path: "title",
+                  fuzzy: { maxEdits: 2 },
+                },
+              },
+              {
+                autocomplete: {
+                  query: key,
+                  path: "subject",
+                  fuzzy: { maxEdits: 2 },
+                },
+              },
+              {
+                autocomplete: {
+                  query: key,
+                  path: "description",
+                  fuzzy: { maxEdits: 2 },
+                },
+              },
+            ],
+          },
+        },
+      },
+    ]),
+    req.query
+  );
+  materialQuery.sort();
+  const filteredmaterials = await materialQuery.query;
+
+  res.status(200).json({
+    status: "success",
+    noOfMaterials: filteredmaterials.length,
+    data: filteredmaterials,
   });
 });
 

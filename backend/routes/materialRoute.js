@@ -10,4 +10,5 @@ router
   .route("/:id")
   .get(materialControllers.getMaterial)
   .delete(authControllers.protect, materialControllers.deleteMaterial);
+router.route("/search/:key").get(materialControllers.searchMaterials);
 module.exports = router;
