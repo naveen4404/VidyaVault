@@ -31,7 +31,9 @@ body {
   align-items: center;
   flex: 1;
 }
-
+.header .home-link {
+  text-decoration: none;
+}
 .header .logo .logo-item {
   /* Placeholder for a simple SVG or icon */
   width: 75px;

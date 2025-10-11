@@ -1,0 +1,111 @@
+.view-page {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Prevent body scroll from layout change */
+  margin: 0;
+  padding: 0;
+}
+
+.view-page .header {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  /* Prevents header from shrinking */
+}
+
+.view-page .header .left-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.view-page .header H3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  /* Hide the title on very small screens to prioritize the Back button */
+  display: block;
+}
+
+@media (max-width: 500px) {
+  .view-page .header H3 {
+    font-size: 1.2rem;
+    /* Optional: Hide title completely on extra small screens */
+    /* display: none; */
+  }
+}
+
+.view-page .header .back-btn {
+  background: none;
+  border: none;
+  color: #13a4ec;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.view-page .header .back-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.view-page .header .right-section button {
+  background-color: #13a4ec;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.view-page .header .right-section button:hover {
+  background-color: #098dcf;
+}
+
+@media (max-width: 500px) {
+  .view-page .header .right-section button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+.material-constainer {
+  flex-grow: 1;
+  /* Takes all remaining space */
+  padding: 10px;
+  background-color: #e5e7eb;
+  overflow: auto;
+  /* Allows content within the iframe to scroll */
+}
+
+.material-constainer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.link {
+  text-decoration: none;
+}
+
+.right-section button .download-link {
+  text-decoration: none;
+  color: white;
+}
