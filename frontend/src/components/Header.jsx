@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import axios from "axios";
 import "./Header.css";
 export function Header({ setMaterials, loginStatus }) {
@@ -80,11 +80,13 @@ export function Header({ setMaterials, loginStatus }) {
             Upload
           </button>
           {loginStatus ? (
-            <i className="fa-regular fa-user profile-icon"></i>
+            <NavLink className="icon" to={"/me"}>
+              <i className="fa-regular fa-user profile-icon"></i>
+            </NavLink>
           ) : (
-            <Link to={"/login"}>
+            <NavLink to={"/login"}>
               <button className="login-btn">Login</button>
-            </Link>
+            </NavLink>
           )}
         </nav>
       </header>

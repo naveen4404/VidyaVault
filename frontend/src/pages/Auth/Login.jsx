@@ -1,32 +1,41 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Header } from "../../components/Header";
 import "./Login.css";
 
 export function Login({ setMaterials, setLoginStatus }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   const handleForm = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
   };
   const logInUser = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
     try {
       const response = await axios.post("/api/users/login", formData);
       localStorage.setItem("authToken", response.data.token);
       setLoginStatus(true);
-
+      toast.success("Logged in succesfully!");
       setFormData({
         email: "",
         password: "",
       });
+      navigate("/");
     } catch (err) {
-      console.log(err.response);
+      if (err.response) {
+        toast.error(err.response.data.message);
+      } else if (err.request) {
+        toast.error("Server not responding. Try again later.");
+      } else {
+        toast.error("Unexpected error occurred.");
+      }
     }
   };
   return (

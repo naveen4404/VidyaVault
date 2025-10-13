@@ -4,7 +4,17 @@ const handleCastErrorDB = (err) => {
   const message = `Invalid ${err.path}: ${err.value}.`;
   return new AppError(message, 400);
 };
-const handleValidationErrorDB = (err) => new AppError(err.message, 400);
+const handleValidationErrorDB = (err) => {
+  const messages = Object.values(err.errors).map((el) => {
+    if (el.path === "password") {
+      return "Please enter a valid password!";
+    } else {
+      return el.message;
+    }
+  });
+
+  return new AppError(messages.join("\n"), 400);
+};
 // Auth Errors
 const handleJWTTokenError = (err) =>
   new AppError(`${err.message}.please login again`, 401);
@@ -16,6 +26,9 @@ const sendErrDev = (err, res) => {
     message: err.message,
     stack: err.stack,
   });
+};
+const handleDupilcateDocument = (err) => {
+  return new AppError(err.message, 400);
 };
 const sendErrProduction = (err, res) => {
   if (err.isOperational) {
@@ -35,20 +48,20 @@ module.exports = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
   const env = process.env.NODE_ENV || "development";
+
   if (env === "production") {
     let error = { ...err, name: err.name, message: err.message };
+
     if (error.name === "CastError") {
       error = handleCastErrorDB(error);
-    }
-    if (error.name === "ValidationError") {
+    } else if (error.name === "ValidationError") {
       error = handleValidationErrorDB(error);
-    }
-    if (error.name === "JsonWebTokenError") {
+    } else if (error.name === "JsonWebTokenError") {
       error = handleJWTTokenError(error);
-    }
-    if (error.code === 11000) {
+    } else if (error.name === "MongooseError") {
       error = handleDupilcateDocument(error);
     }
+
     sendErrProduction(error, res);
   } else if (env === "development") {
     sendErrDev(err, res);

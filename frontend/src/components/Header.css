@@ -127,7 +127,9 @@ body {
   gap: 12px;
   /* Increased gap */
 }
-
+.header .nav-items .active .login-btn {
+  text-decoration: 2px underline;
+}
 .header .nav-items button {
   background-color: #13a4ec;
   color: white;
@@ -164,15 +166,20 @@ body {
 
 .header .nav-items .profile-icon {
   color: white;
-  font-size: 30px;
-  background-color: #13a4ec;
-  border-radius: 15px;
+  font-size: 28px;
+  color: #13a4ec;
+  border-radius: 17.5px;
+  border: 2px solid #13a4ec;
   padding: 4px;
 }
 .header .nav-items .profile-icon:hover {
   cursor: pointer;
-  background-color: #098dcf;
+  background-color: #e3e7e8;
   transition: all 1s;
+}
+.header .nav-items .icon .active {
+  background-color: #13a4ec;
+  color: white;
 }
 /* ========== RESPONSIVENESS (Top-Right Anchor Ensured) ========== */
 
@@ -253,11 +260,11 @@ body {
     /* Slightly reduced padding */
   }
   .header .nav-items .profile-icon {
-    color: white;
+    background-color: white;
     font-size: 23px;
-    background-color: #13a4ec;
-    border-radius: 11px;
-    padding: 4px;
+    color: #13a4ec;
+    border-radius: 14px;
+    padding: 3px;
   }
 }
 

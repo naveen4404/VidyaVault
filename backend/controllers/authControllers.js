@@ -23,8 +23,8 @@ const createAndSendJwt = (user, res, statusCode) => {
 // user signup
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
-    name: req.body.name,
-    email: req.body.email,
+    name: req.body.name.trim(),
+    email: req.body.email.trim(),
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
   });
@@ -32,7 +32,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 // user login
-exports.login = async (req, res, next) => {
+exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
   // check for email and password
   if (!email || !password)
@@ -45,7 +45,7 @@ exports.login = async (req, res, next) => {
     return next(new AppError("Incorrect email or password", 401));
 
   createAndSendJwt(user, res, 200);
-};
+});
 
 // route protecter
 exports.protect = catchAsync(async (req, res, next) => {
