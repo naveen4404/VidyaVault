@@ -127,9 +127,7 @@ body {
   gap: 12px;
   /* Increased gap */
 }
-.header .nav-items .active .login-btn {
-  text-decoration: 2px underline;
-}
+
 .header .nav-items button {
   background-color: #13a4ec;
   color: white;
@@ -152,7 +150,9 @@ body {
 .header .nav-items button:active {
   transform: scale(0.98);
 }
-
+.header .nav-items .active {
+  display: none;
+}
 .header .nav-items .login-btn {
   color: #374151;
   /* Dark gray text */
@@ -176,10 +176,6 @@ body {
   cursor: pointer;
   background-color: #e3e7e8;
   transition: all 1s;
-}
-.header .nav-items .icon .active {
-  background-color: #13a4ec;
-  color: white;
 }
 /* ========== RESPONSIVENESS (Top-Right Anchor Ensured) ========== */
 

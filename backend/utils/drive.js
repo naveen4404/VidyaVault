@@ -22,7 +22,7 @@ exports.validateDriveLink = async (fileId) => {
   try {
     const url = `https://drive.google.com/uc?export=download&id=${fileId}`;
     const response = await fetch(url, { method: "HEAD" });
-    console.log(response);
+
     return response.ok;
   } catch (err) {
     return false;

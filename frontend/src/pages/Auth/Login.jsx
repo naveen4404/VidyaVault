@@ -73,7 +73,7 @@ export function Login({ setMaterials, setLoginStatus }) {
           </button>
           <p className="signup-text">
             Don't have an account?
-            <Link className="signup-link" to={"/signup"}>
+            <Link className="signup-link" to={"/auth/signup"}>
               Sign Up
             </Link>
           </p>

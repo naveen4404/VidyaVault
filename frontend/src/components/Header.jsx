@@ -75,16 +75,21 @@ export function Header({ setMaterials, loginStatus }) {
           </button>
         </div>
         <nav className="nav-items">
-          <button className="upload-btn">
-            <i className="fa-solid fa-arrow-up-from-bracket" />
-            Upload
-          </button>
+          <NavLink
+            to={loginStatus ? "/upload" : "/auth/login"}
+            className="upload-link"
+          >
+            <button className="upload-btn">
+              <i className="fa-solid fa-arrow-up-from-bracket" />
+              Upload
+            </button>
+          </NavLink>
           {loginStatus ? (
             <NavLink className="icon" to={"/me"}>
               <i className="fa-regular fa-user profile-icon"></i>
             </NavLink>
           ) : (
-            <NavLink to={"/login"}>
+            <NavLink to={"/auth/login"}>
               <button className="login-btn">Login</button>
             </NavLink>
           )}
