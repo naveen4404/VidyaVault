@@ -123,6 +123,7 @@ body {
   flex: 1;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 12px;
   /* Increased gap */
 }
@@ -161,6 +162,18 @@ body {
   background-color: #d1d5db;
 }
 
+.header .nav-items .profile-icon {
+  color: white;
+  font-size: 30px;
+  background-color: #13a4ec;
+  border-radius: 15px;
+  padding: 4px;
+}
+.header .nav-items .profile-icon:hover {
+  cursor: pointer;
+  background-color: #098dcf;
+  transition: all 1s;
+}
 /* ========== RESPONSIVENESS (Top-Right Anchor Ensured) ========== */
 
 /* Medium screens (tablet and small laptops) - Only changes size, not layout order */
@@ -199,7 +212,11 @@ body {
   .header .logo {
     justify-content: flex-start;
   }
-
+  .header .logo .logo-text {
+    font-size: 10px;
+    margin-left: 4px;
+    letter-spacing: 0;
+  }
   .header .search-bar {
     margin-top: 10px;
     /* Reduced margin for smaller screens */
@@ -234,6 +251,13 @@ body {
     font-size: 14px;
     padding: 7px 10px;
     /* Slightly reduced padding */
+  }
+  .header .nav-items .profile-icon {
+    color: white;
+    font-size: 23px;
+    background-color: #13a4ec;
+    border-radius: 11px;
+    padding: 4px;
   }
 }
 

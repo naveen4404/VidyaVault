@@ -1,0 +1,106 @@
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+/* Main Form Container */
+.auth-container {
+  width: 100%;
+  max-width: 400px; /* Max width for desktop */
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spacing between all elements */
+}
+
+.auth-container h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* Styling for all main input fields */
+.input-field {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #13a4ec;
+  box-shadow: 0 0 0 2px rgba(19, 164, 236, 0.2);
+}
+
+/* Container for password input and show button (Flexbox for horizontal alignment) */
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Submit Button */
+.submit-btn {
+  background-color: #13a4ec;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #098dcf;
+}
+
+.submit-btn:active {
+  transform: scale(0.99);
+}
+.signup-text {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-top: 10px; /* space after button */
+}
+
+.signup-link {
+  color: #13a4ec;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.signup-link:hover {
+  color: #098dcf;
+  text-decoration: underline;
+}
+/* Responsive Adjustments for Mobile */
+@media (max-width: 450px) {
+  .login-container {
+    padding: 20px;
+    gap: 12px;
+  }
+  .login-container h2 {
+    font-size: 1.5rem;
+  }
+  .input-field {
+    padding: 10px 12px;
+  }
+  .show-btn {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+}

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import axios from "axios";
 import "./Header.css";
-export function Header({ setMaterials }) {
+export function Header({ setMaterials, loginStatus }) {
   const [query, setQuery] = useState("");
+  const navigate = useNavigate();
   const setQueryText = (event) => {
     setQuery(event.target.value);
   };
@@ -11,24 +12,17 @@ export function Header({ setMaterials }) {
   const fetchMaterialOnSearch = async () => {
     let response;
     if (query.length > 2) {
-      response = await axios.get(
-        `http://127.0.0.1:8000/api/materials/search/${query.trim()}`
-      );
+      response = await axios.get(`/api/materials/search/${query.trim()}`);
       setMaterials(response.data.data);
+      navigate("/");
     }
   };
   useEffect(() => {
     const timer = setTimeout(async () => {
       try {
-        let response;
         if (query.length > 2) {
-          response = await axios.get(
-            `http://127.0.0.1:8000/api/materials/search/${query.trim()}`
-          );
-        } else {
-          response = await axios.get("http://127.0.0.1:8000/api/materials/");
+          fetchMaterialOnSearch();
         }
-        setMaterials(response.data.data);
       } catch (err) {
         console.error(err);
       }
@@ -85,7 +79,13 @@ export function Header({ setMaterials }) {
             <i className="fa-solid fa-arrow-up-from-bracket" />
             Upload
           </button>
-          <button className="login-btn">Login</button>
+          {loginStatus ? (
+            <i className="fa-regular fa-user profile-icon"></i>
+          ) : (
+            <Link to={"/login"}>
+              <button className="login-btn">Login</button>
+            </Link>
+          )}
         </nav>
       </header>
     </>
