@@ -6,3 +6,16 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 2px dashed #e0f2fe;
+  border-radius: 1rem;
+  color: #6b7280;
+  background-color: #fff;
+}
+.empty-state p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}

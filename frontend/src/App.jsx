@@ -7,6 +7,7 @@ import { Home } from "./pages/Home/Home";
 import { Login } from "./pages/Auth/Login";
 import { SignUp } from "./pages/Auth/Signup";
 import { Upload } from "./pages/upload/upload";
+import { Profile } from "./pages/Profile/Profile";
 
 import "./App.css";
 
@@ -68,6 +69,15 @@ export function App() {
             path="/upload"
             element={
               <Upload loginStatus={loginStatus} setMaterials={setMaterials} />
+            }
+          />
+          <Route
+            path="/me"
+            element={
+              <Profile
+                loginStatus={loginStatus}
+                setLoginStatus={setLoginStatus}
+              />
             }
           />
         </Route>

@@ -1,0 +1,264 @@
+:root {
+  --color-primary-blue: #38bdf8; /* Sky Blue */
+  --color-soft-blue: #e0f2fe; /* Soft Blue 100 - Card background */
+  --color-accent-teal: #14b8a6; /* Teal - Accents */
+  --color-bg-light: #f9fafb; /* Off-White background */
+  --color-text-dark: #1f2937; /* Gray 800 */
+  --color-text-medium: #6b7280; /* Gray 600 */
+  --color-border: #e5e7eb; /* Gray 200 */
+  --color-red: #ef4444; /* Error/Delete color */
+  --border-radius-lg: 1rem;
+  --border-radius-sm: 0.5rem;
+}
+
+/* Global Fix and Base Styling */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.page-container {
+  min-height: 100vh;
+  padding: 2.5rem 1rem;
+}
+.content-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* --- 1. Profile Info Card --- */
+.profile-info-card {
+  background-color: #fff; /* White background */
+  padding: 2rem;
+  border-radius: var(--border-radius-lg);
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.06); /* Soft Shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content on mobile */
+  text-align: center;
+  gap: 1.5rem;
+}
+
+/* Avatar Placeholder */
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: var(--color-soft-blue);
+  color: var(--color-primary-blue);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  border: 3px solid var(--color-primary-blue);
+  margin-bottom: 0.5rem;
+}
+
+/* Profile Details */
+.profile-details h3 {
+  font-size: 2rem; /* Large, bold name */
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+.profile-details p {
+  font-size: 1rem;
+  color: var(--color-text-medium);
+  margin: 0;
+}
+
+/* User ID Display (Preserving previous requirement) */
+.user-id-display {
+  font-size: 0.75rem;
+  color: var(--color-text-medium);
+  word-break: break-all;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--color-border);
+  width: 100%; /* Ensure it spans the card width */
+}
+
+/* Sign Out Button (Secondary/Outlined Style) */
+.signout-button {
+  background-color: transparent;
+  color: var(--color-primary-blue);
+  border: 2px solid var(--color-primary-blue);
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+.signout-button:hover {
+  background-color: var(--color-soft-blue);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 2. Uploaded Materials Section --- */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 1.5rem;
+  border-left: 4px solid var(--color-accent-teal);
+  padding-left: 1rem;
+}
+
+/* Card Grid for Uploaded Materials */
+.material-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr; /* Default: 1 column on mobile */
+  margin-top: 1.5rem;
+}
+
+/* Material Card Style */
+.material-card {
+  position: relative;
+  background-color: #fff;
+  padding: 1.25rem;
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--color-border);
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.material-card .date {
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+  font-size: 0.875rem;
+  color: var(--color-text-medium);
+}
+.material-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.material-card h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-accent-teal);
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.card-meta {
+  font-size: 0.875rem;
+  color: var(--color-text-medium);
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.card-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* Action Buttons on Card */
+.card-button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.view-button {
+  background-color: var(--color-primary-blue);
+  color: white;
+  border: none;
+}
+.view-button:hover {
+  background-color: #0ea5e9;
+}
+.delete-button {
+  background-color: transparent;
+  color: var(--color-red);
+  border: 1px solid var(--color-red);
+}
+.delete-button:hover {
+  background-color: #fef2f2;
+}
+
+/* Empty State Styling */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 2px dashed var(--color-soft-blue);
+  border-radius: var(--border-radius-lg);
+  color: var(--color-text-medium);
+  background-color: #fff;
+}
+.empty-state p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-primary-blue);
+  margin-top: 0.5rem;
+}
+
+/* Footer */
+.footer-quote {
+  margin-top: 5rem;
+  text-align: center;
+  color: var(--color-text-medium);
+  font-size: 0.875rem;
+}
+
+/* Media Queries for Responsiveness */
+@media (min-width: 640px) {
+  .profile-info-card {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    justify-content: space-between;
+    padding: 2.5rem;
+  }
+  .profile-details {
+    flex-grow: 1; /* Allows details to take necessary space */
+    padding-left: 2rem;
+    border-left: 1px solid var(--color-border);
+  }
+  .avatar {
+    margin-bottom: 0;
+  }
+  .profile-details h3 {
+    font-size: 1.75rem;
+  }
+  .signout-button {
+    margin-top: 0;
+    align-self: center;
+  }
+  .user-id-display {
+    position: absolute; /* Place ID absolutely to manage layout */
+    bottom: 1rem;
+    left: 1rem;
+    width: auto;
+    border-top: none;
+    padding-top: 0;
+  }
+  .material-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on tablet */
+  }
+}
+@media (min-width: 1024px) {
+  .material-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on small desktop */
+  }
+}
+@media (min-width: 1280px) {
+  .material-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on large desktop */
+  }
+}

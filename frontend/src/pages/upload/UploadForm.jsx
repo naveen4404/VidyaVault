@@ -58,7 +58,7 @@ export function UploadForm() {
             value={formData.title}
             onChange={handleForm}
             required
-            placeholder="e.g., Data Structures Mid-Term QPs (2020-2023)"
+            placeholder="e.g., Data Structures concepts"
           />
         </div>
 
@@ -71,7 +71,7 @@ export function UploadForm() {
             value={formData.subject}
             onChange={handleForm}
             required
-            placeholder="e.g., Computer Science, History"
+            placeholder="e.g., Computer Science, DBMS"
           />
         </div>
 
