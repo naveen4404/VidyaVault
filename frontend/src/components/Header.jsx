@@ -1,6 +1,7 @@
+import axiosInstance from "../api/axios";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
-import axios from "axios";
+
 import "./Header.css";
 export function Header({ setMaterials, loginStatus }) {
   const [query, setQuery] = useState("");
@@ -12,7 +13,9 @@ export function Header({ setMaterials, loginStatus }) {
   const fetchMaterialOnSearch = async () => {
     let response;
     if (query.length > 2) {
-      response = await axios.get(`/api/materials/search/${query.trim()}`);
+      response = await axiosInstance.get(
+        `/api/materials/search/${query.trim()}`
+      );
       setMaterials(response.data.data);
       navigate("/");
     }

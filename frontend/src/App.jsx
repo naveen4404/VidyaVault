@@ -5,8 +5,8 @@ import { Navigate, Outlet } from "react-router";
 import { View } from "./View";
 import { Home } from "./pages/Home/Home";
 import { Login } from "./pages/Auth/Login";
-import { SignUp } from "./pages/Auth/Signup";
-import { Upload } from "./pages/upload/upload";
+import { SignUp } from "./pages/Auth/SignUp";
+import { Upload } from "./pages/Upload/Upload";
 import { Profile } from "./pages/Profile/Profile";
 
 import "./App.css";

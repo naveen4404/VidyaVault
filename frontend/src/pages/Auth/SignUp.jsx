@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../api/axios";
 import toast from "react-hot-toast";
 import { Header } from "../../components/Header";
 import "./Login.css";
@@ -20,7 +20,7 @@ export function SignUp({ setMaterials, setLoginStatus }) {
   const signUpUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/users/signup", formData);
+      const response = await axiosInstance.post("/api/users/signup", formData);
       setLoginStatus(true);
       toast.success(`Welcome ${response.data.user.name}!`, {
         icon: "😊",

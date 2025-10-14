@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../api/axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 export function UploadForm() {
@@ -16,7 +16,7 @@ export function UploadForm() {
     e.preventDefault();
     const token = localStorage.getItem("authToken");
 
-    const uploadPromise = axios
+    const uploadPromise = axiosInstance
       .post("/api/materials", formData, {
         headers: {
           Authorization: `Bearer ${token}`,

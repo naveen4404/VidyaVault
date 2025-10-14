@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../api/axios";
 import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { Loader } from "../../components/Loader";
@@ -12,7 +12,7 @@ export function Profile({ loginStatus, setLoginStatus }) {
   const [loading, setLoading] = useState(true);
 
   const loadMaterials = async (id) => {
-    const materialResponse = await axios.get(
+    const materialResponse = await axiosInstance.get(
       `/api/materials/?uploadedBy=${id}`
     );
     setUserMaterials(materialResponse.data.data);
@@ -22,7 +22,7 @@ export function Profile({ loginStatus, setLoginStatus }) {
     const getUser = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const userResponse = await axios.get("/api/users/me", {
+        const userResponse = await axiosInstance.get("/api/users/me", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

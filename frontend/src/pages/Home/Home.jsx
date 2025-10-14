@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../api/axios";
 import { useEffect, useState } from "react";
 import { CardContainer } from "./CardContainer";
 import { Header } from "../../components/Header";
@@ -10,7 +10,7 @@ export function Home({ materials, setMaterials, loginStatus }) {
   useEffect(() => {
     const fetchMaterials = async () => {
       try {
-        const response = await axios.get("/api/materials/");
+        const response = await axiosInstance.get("/api/materials/");
         setMaterials(response.data.data);
       } catch (err) {
         console.error(err.message);

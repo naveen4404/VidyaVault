@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import axios from "axios";
+import axiosInstance from "../../api/axios";
 import toast from "react-hot-toast";
 import { formatName } from "../../utils/formatName";
 import { Link } from "react-router";
@@ -7,7 +7,7 @@ import { Link } from "react-router";
 export function MaterialCard({ material, loadMaterials }) {
   const handleDelete = async () => {
     const token = localStorage.getItem("authToken");
-    const deletePromise = axios
+    const deletePromise = axiosInstance
       .delete(`/api/materials/${material._id}`, {
         headers: {
           Authorization: `Bearer ${token}`,

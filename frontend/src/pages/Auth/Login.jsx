@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../api/axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
@@ -19,7 +19,7 @@ export function Login({ setMaterials, setLoginStatus }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post("/api/users/login", formData);
+      const response = await axiosInstance.post("/api/users/login", formData);
       localStorage.setItem("authToken", response.data.token);
       setLoginStatus(true);
       toast.success("Logged in succesfully!");
