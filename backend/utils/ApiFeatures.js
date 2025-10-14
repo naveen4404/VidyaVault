@@ -15,7 +15,7 @@ class ApiFeatures {
       const sortStr = this.queryObj.sort.split(",").join(" ");
       this.query.sort(sortStr);
     } else {
-      this.query.sort("uploadedAt");
+      this.query.sort("-uploadedAt");
     }
     return this;
   }

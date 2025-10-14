@@ -2,10 +2,10 @@ import { UploadForm } from "./UploadForm";
 import { Guidelines } from "./guidelines";
 import { Header } from "../../components/Header";
 import "./Upload.css";
-export function Upload({ loginStatus }) {
+export function Upload({ loginStatus, setMaterials }) {
   return (
     <>
-      <Header loginStatus={loginStatus} />
+      <Header loginStatus={loginStatus} setMaterials={setMaterials} />
       <Guidelines />
       <UploadForm />
     </>

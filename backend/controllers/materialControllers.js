@@ -83,10 +83,12 @@ exports.searchMaterials = catchAsync(async (req, res, next) => {
 // uploading material
 exports.uploadMaterial = catchAsync(async (req, res, next) => {
   //check whether the link belongs to drive or not
+
   if (!drive.isDriveLink(req.body.fileLink))
     return next(new AppError("Invalid drive link", 400));
   // get the link and extract id
   const fileId = drive.getDriveId(req.body.fileLink);
+
   if (!fileId) return next(new AppError("Invalid drive link", 400));
   // check for validity of the link
   if (!(await drive.validateDriveLink(fileId)))

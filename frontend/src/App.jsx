@@ -66,7 +66,9 @@ export function App() {
         <Route element={<ProtectedRoute isAuth={loginStatus} />}>
           <Route
             path="/upload"
-            element={<Upload loginStatus={loginStatus} />}
+            element={
+              <Upload loginStatus={loginStatus} setMaterials={setMaterials} />
+            }
           />
         </Route>
 

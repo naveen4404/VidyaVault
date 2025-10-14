@@ -16,11 +16,9 @@ export function Home({ materials, setMaterials, loginStatus }) {
     <>
       <Header setMaterials={setMaterials} loginStatus={loginStatus} />
       <main className="cards-grid">
-        {materials.length === 0
-          ? "No materials found "
-          : materials.map((material) => {
-              return <CardContainer key={material._id} material={material} />;
-            })}
+        {materials.map((material) => {
+          return <CardContainer key={material._id} material={material} />;
+        })}
       </main>
     </>
   );

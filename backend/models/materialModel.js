@@ -29,7 +29,7 @@ const materialSchema = mongoose.Schema({
   fileId: {
     type: String,
     required: true,
-    unique: [true, "material exists already"],
+    unique: [true, "material is already exists"],
   },
 });
 materialSchema.index({ title: "text", subject: "text", description: "text" });
