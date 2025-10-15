@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 
 export function SignUp({ setMaterials, setLoginStatus }) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,28 +20,52 @@ export function SignUp({ setMaterials, setLoginStatus }) {
   };
   const signUpUser = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axiosInstance.post("/api/users/signup", formData);
-      setLoginStatus(true);
-      toast.success(`Welcome ${response.data.user.name}!`, {
-        icon: "😊",
+    setLoading(true);
+    const signUpPromise = axiosInstance
+      .post("/api/users/signup", formData)
+      .then((res) => {
+        console.log(res.data);
+        setLoginStatus(true);
+        localStorage.setItem("authToken", res.data.token);
+        setFormData({
+          name: "",
+          email: "",
+          password: "",
+          passwordConfirm: "",
+        });
+
+        navigate("/");
+      })
+      .finally(() => {
+        setLoading(false);
       });
-      setFormData({
-        name: "",
-        email: "",
-        password: "",
-        passwordConfirm: "",
-      });
-      navigate("/");
-    } catch (err) {
-      if (err.response) {
-        toast.error(err.response.data.message);
-      } else if (err.request) {
-        toast.error("server not responding. Try again later");
-      } else {
-        toast.error("Unexpected eroor occured");
+
+    toast.promise(
+      signUpPromise,
+      {
+        loading: "Signing up...",
+        success: () => {
+          return "Welcome";
+        },
+
+        error: (err) => {
+          console.log(err);
+          if (err.response) {
+            return err.response.data.message || "SignUp failed";
+          } else if (err.request) {
+            return "Server not responding. Try again later.";
+          } else {
+            console.log(err);
+            return "Something went wrong.";
+          }
+        },
+      },
+      {
+        success: {
+          icon: "😊",
+        },
       }
-    }
+    );
   };
 
   return (
@@ -89,8 +114,8 @@ export function SignUp({ setMaterials, setLoginStatus }) {
               required
             />
           </div>
-          <button type="submit" className="submit-btn">
-            Sign Up
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? "Signing up..." : "Sign Up"}
           </button>
         </form>
       </div>

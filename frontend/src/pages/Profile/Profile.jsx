@@ -5,6 +5,7 @@ import { Loader } from "../../components/Loader";
 import { ProfileCard } from "./ProfileCard";
 import { MaterialCard } from "./MaterialCard";
 import "./Profile.css";
+import toast from "react-hot-toast";
 
 export function Profile({ loginStatus, setLoginStatus }) {
   const [userProfile, setUserProfile] = useState({});
@@ -30,10 +31,16 @@ export function Profile({ loginStatus, setLoginStatus }) {
 
         setUserProfile(userResponse.data.profile);
         loadMaterials(userResponse.data.profile._id);
-      } catch (err) {
-        console.log(err);
-      } finally {
         setLoading(false);
+      } catch (err) {
+        setLoginStatus(false);
+        if (err.response) {
+          toast.error(err.response.data.message || "Upload failed");
+        } else if (err.request) {
+          toast.error("Server not responding. Try again later.");
+        } else {
+          toast.error("Something went wrong.");
+        }
       }
     };
     getUser();

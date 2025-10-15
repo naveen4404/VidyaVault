@@ -69,7 +69,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // 3) check if the user is still existed
   if (!currentUser) {
-    return next(new AppError("The user with the token is not existed", 401));
+    return next(new AppError("The user not existed", 401));
   }
   // 4) check if the user has changed password
   if (currentUser.isPasswordChanged(decoded.iat)) {

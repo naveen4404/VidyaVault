@@ -7,6 +7,7 @@ import "./Login.css";
 
 export function Login({ setMaterials, setLoginStatus }) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -17,26 +18,37 @@ export function Login({ setMaterials, setLoginStatus }) {
   };
   const logInUser = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axiosInstance.post("/api/users/login", formData);
-      localStorage.setItem("authToken", response.data.token);
-      setLoginStatus(true);
-      toast.success("Logged in succesfully!");
-      setFormData({
-        email: "",
-        password: "",
+    setLoading(true);
+    const loginPromise = axiosInstance
+      .post("/api/users/login", formData)
+      .then((res) => {
+        setLoginStatus(true);
+        localStorage.setItem("authToken", res.data.token);
+        setFormData({
+          email: "",
+          password: "",
+        });
+        navigate("/");
+      })
+      .finally(() => {
+        setLoading(false);
       });
-      navigate("/");
-    } catch (err) {
-      if (err.response) {
-        toast.error(err.response.data.message);
-      } else if (err.request) {
-        toast.error("Server not responding. Try again later.");
-      } else {
-        toast.error("Unexpected error occurred.");
-      }
-    }
+
+    toast.promise(loginPromise, {
+      loading: "Logging in...",
+      success: () => {
+        return "Logged in succesfully";
+      },
+      error: (err) => {
+        if (err.response) {
+          return err.response.data.message || "Login failed";
+        } else if (err.request) {
+          return "Server not responding. Try again later.";
+        } else {
+          return "Something went wrong.";
+        }
+      },
+    });
   };
   return (
     <>
@@ -68,8 +80,8 @@ export function Login({ setMaterials, setLoginStatus }) {
             />
           </div>
 
-          <button type="submit" className="submit-btn">
-            Login
+          <button type="submit" className="submit-btn" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
           </button>
           <p className="signup-text">
             Don't have an account?
