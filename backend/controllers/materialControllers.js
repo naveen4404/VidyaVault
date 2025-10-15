@@ -37,14 +37,14 @@ exports.searchMaterials = catchAsync(async (req, res, next) => {
                 autocomplete: {
                   query: key,
                   path: "title",
-                  fuzzy: { maxEdits: 2 },
+                  fuzzy: { maxEdits: 1 },
                 },
               },
               {
                 autocomplete: {
                   query: key,
                   path: "subject",
-                  fuzzy: { maxEdits: 2 },
+                  fuzzy: { maxEdits: 1 },
                 },
               },
               {

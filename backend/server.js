@@ -4,7 +4,7 @@ dotenv.config({ path: "./config.env" });
 const mongoose = require("mongoose");
 const app = require("./app");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 //connection to database
 const PASSWORD = process.env.DB_PASSWORD;
 
