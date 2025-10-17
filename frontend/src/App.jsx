@@ -8,7 +8,7 @@ import { Login } from "./pages/Auth/Login";
 import { SignUp } from "./pages/Auth/SignUp";
 import { Upload } from "./pages/upload/Upload";
 import { Profile } from "./pages/Profile/Profile";
-
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import "./App.css";
 
 export function App() {
@@ -84,6 +84,7 @@ export function App() {
 
         <Route path="/view/:materialTitle/:id" element={<View />} />
       </Routes>
+      <SpeedInsights />
     </>
   );
 }
