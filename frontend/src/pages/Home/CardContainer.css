@@ -54,7 +54,8 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  overflow: hidden;
+  overflow: scroll;
+  scrollbar-width: none;
   flex-grow: 1;
   /* Pushes the button and metadata to the bottom */
 }

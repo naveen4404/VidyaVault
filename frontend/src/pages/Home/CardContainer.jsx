@@ -2,7 +2,6 @@ import { useNavigate } from "react-router";
 import dayjs from "dayjs";
 import { formatName } from "../../utils/formatName";
 import "./CardContainer.css";
-
 export function CardContainer({ material }) {
   const navigate = useNavigate();
   const viewFile = () => {
